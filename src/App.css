@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+
+/* Define Custom Theme Colors */
+:root {
+  --primary: #3B82F6;  /* Royal Blue */
+  --secondary: #F59E0B;  /* Gold */
+  --background: #F9FAFB;  /* Soft White */
+  --text-dark: #1F2937;  /* Charcoal Gray */
+  --text-light: #4B5563;  /* Slate Gray */
+  --success: #10B981;  /* Emerald Green */
+  --warning: #EF4444;  /* Rose Red */
+}
+
+/* Create Utility Classes */
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.text-dark {
+  color: var(--text-dark);
+}
+
+.text-light {
+  color: var(--text-light);
+}
