@@ -45,62 +45,60 @@ app.get("/api/dashboard-stats", (req, res) => {
     });
 });
 
-//api for members page 
-// app.get("/api/members/:circuitId", (req, res) => {
-//     const { circuitId } = req.params;
-//     const { search, gender, employment_status, marital_status } = req.query;
-
-//     let query = "SELECT * FROM members WHERE circuit_id = ?";
-//     let params = [circuitId];
-
-//     if (search) {
-//         query += " AND name LIKE ?";
-//         params.push(`%${search}%`);
-//     }
-//     if (gender) {
-//         query += " AND gender = ?";
-//         params.push(gender);
-//     }
-//     if (employment_status) {
-//         query += " AND employment_status = ?";
-//         params.push(employment_status);
-//     }
-//     if (marital_status) {
-//         query += " AND marital_status = ?";
-//         params.push(marital_status);
-//     }
-
-//     db.query(query, params, (err, results) => {
-//         if (err) return res.status(500).json({ error: err.message });
-//         res.json(results);
-//     });
-// });
-
-app.use(express.json()); // Ensure you can parse JSON
-
+// ✅ Member Registration Route
 app.post("/api/members", (req, res) => {
-    const { name, gender, employment_status, marital_status, contact, circuit, diocese } = req.body;
+    const { name, contact, gender, employment_status, marital_status, circuit, diocese } = req.body;
 
     if (!name || !contact) {
-        return res.status(400).json({ message: "Name and Contact are required" });
+        return res.status(400).json({ message: "❌ Name and Contact are required" });
     }
 
-    // Simulate database insert (replace this with actual DB logic)
-    console.log("Received data:", req.body);
+    const sql = `INSERT INTO members (name, contact, gender, employment_status, marital_status, circuit, diocese) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    res.status(201).json({ message: "Member added successfully", data: req.body });
+
+    db.query(sql, [name, contact, gender, employment_status, marital_status, circuit, diocese], (err, result) => {
+        if (err) {
+            console.error("❌ Error saving member:", err);
+            return res.status(500).json({ message: "❌ Failed to add member", error: err });
+        }
+
+        res.status(201).json({
+            message: "✅ Member added successfully",
+            data: { id: result.insertId, ...req.body }
+        });
+    });
 });
-
-router.post("/members", async (req, res) => {
+//fetch
+app.get("/api/members", async (req, res) => {
     try {
-        const newMember = await Member.create(req.body);
-        res.status(201).json({ message: "Member added successfully", data: newMember });
+        const [rows] = await db.promise().query("SELECT * FROM members");
+        res.status(200).json(rows);
     } catch (error) {
-        console.error("Error saving member:", error);
-        res.status(500).json({ message: "Failed to add member", error });
+        console.error("Error fetching members:", error);
+        res.status(500).json({ message: "Failed to fetch members", error });
     }
 });
 
+//diocese page 
+// Fetch members for the Diocese Page (all members by default, filter by diocese if selected)
+app.get("/api/members", async (req, res) => {
+    try {
+        const { diocese } = req.query;
+        let sql = "SELECT * FROM members";
+        let params: any[] = [];
+
+        if (diocese) {
+            sql += " WHERE diocese = ?";
+            params.push(diocese);
+        }
+
+        const [rows] = await db.promise().query(sql, params);
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error("Error fetching members:", error);
+        res.status(500).json({ message: "Failed to fetch members", error });
+    }
+});
 
 
 

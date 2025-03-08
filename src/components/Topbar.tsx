@@ -38,40 +38,14 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
 
  const handleSubmit = async () => {
     try {
-        const response = await fetch("http://localhost:5001/api/members", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-            const errorMessage = await response.text(); // Read backend error message
-            throw new Error(errorMessage);
-        }
-
-        const data = await response.json();
-        alert("Member added successfully!");
-        console.log("Server Response:", data);
-
-        // Close modal and reset form
-        setModalType(null);
-        setFormData({
-            name: "",
-            gender: "",
-            employment_status: "",
-            marital_status: "",
-            contact: "",
-            circuit: "",
-            diocese: "",
-        });
-
+        const response = await axios.post("http://localhost:5001/api/members", formData);
+        alert(response.data.message);
     } catch (error) {
-        console.error("Error saving member:", error);
-        alert(`Failed to add member: ${error.message}`);
+        console.error("❌ Error saving member:", error);
+        alert("Failed to add member. Please try again.");
     }
 };
+
 
 
 

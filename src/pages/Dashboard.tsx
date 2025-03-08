@@ -103,10 +103,11 @@ const Dashboard = () => {
                         <h3 className="text-lg font-semibold mb-4 text-sky-700">Calendar</h3>
                         <div className="flex justify-center">
                             <Calendar
-                                onChange={setDate}
+                                onChange={(value) => setDate(value as Date)}
                                 value={date}
                                 className="custom-calendar"
                             />
+
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import Dashboard from './pages/Dashboard'
 import Members from './pages/Member'
+import Diocese from './pages/Diocese'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/members' element={<Members />} />
+      <Route path='/diocese' element={<Diocese />} />
     </Routes>
     </>
   )
