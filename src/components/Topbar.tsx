@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBell, faPlus, faUser, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
@@ -8,6 +8,7 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
     const location = useLocation();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [modalType, setModalType] = useState<string | null>(null);
+    const [dioceses, setDioceses] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         name: "",
         gender: "",
@@ -18,6 +19,19 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
         diocese: "",
     });
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        // Fetch available dioceses from the database
+        const fetchDioceses = async () => {
+            try {
+                const response = await axios.get("http://localhost:5001/api/dioceses");
+                setDioceses(response.data);
+            } catch (error) {
+                console.error("❌ Error fetching dioceses:", error);
+            }
+        };
+        fetchDioceses();
+    }, []);
 
     const formatPageTitle = (pathname: string) => {
         const paths = pathname.split("/").filter((x) => x);
@@ -33,21 +47,15 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
- // Import axios at the top if you prefer axios
-
-
- const handleSubmit = async () => {
-    try {
-        const response = await axios.post("http://localhost:5001/api/members", formData);
-        alert(response.data.message);
-    } catch (error) {
-        console.error("❌ Error saving member:", error);
-        alert("Failed to add member. Please try again.");
-    }
-};
-
-
-
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post("http://localhost:5001/api/members", formData);
+            alert(response.data.message);
+        } catch (error) {
+            console.error("❌ Error saving member:", error);
+            alert("Failed to add member. Please try again.");
+        }
+    };
 
     return (
         <div className="flex justify-between items-center p-4 bg-white shadow-md fixed top-0 left-0 w-full md:w-[calc(100%-256px)] md:ml-64 transition-all z-40">
@@ -85,7 +93,7 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
             </div>
 
             {modalType === "Members" && (
-                <div className="fixed inset-0  bg-opacity-40 flex justify-center items-center backdrop-blur-sm">
+                <div className="fixed inset-0 bg-opacity-40 flex justify-center items-center backdrop-blur-sm">
                     <div className="bg-white p-6 rounded-lg shadow-xl w-96 animate-fadeIn">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-semibold">Add New Member</h2>
@@ -116,7 +124,12 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
 
                             <input type="text" name="circuit" placeholder="Circuit" className="border p-2 rounded w-full" value={formData.circuit} onChange={handleChange} />
 
-                            <input type="text" name="diocese" placeholder="Diocese" className="border p-2 rounded w-full" value={formData.diocese} onChange={handleChange} />
+                            <select name="diocese" className="border p-2 rounded w-full" value={formData.diocese} onChange={handleChange}>
+                                <option value="">Select Diocese</option>
+                                {dioceses.map((diocese) => (
+                                    <option key={diocese} value={diocese}>{diocese}</option>
+                                ))}
+                            </select>
                         </div>
 
                         <div className="flex justify-end space-x-2 mt-4">

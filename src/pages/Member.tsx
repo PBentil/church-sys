@@ -4,6 +4,7 @@ import Topbar from "../components/Topbar";
 import Breadcrumbs from "../components/Breadcrumbs";
 import axios from "axios";
 
+
 type Member = {
     id: number;
     name: string;
@@ -15,7 +16,7 @@ type Member = {
 const Members = () => {
     const [members, setMembers] = useState<Member[]>([]);
     const [gender, setGender] = useState("");
-    const [employmentStatus, setEmploymentStatus] = useState("");
+    const [employmentStatus] = useState("");
     const [maritalStatus, setMaritalStatus] = useState("");
     const [search, setSearch] = useState("");
 
@@ -45,7 +46,9 @@ const Members = () => {
             <div className="lg:ml-64 w-full min-h-screen p-6">
             <Topbar toggleSidebar={() => { }} />
             <Breadcrumbs />
+           
                 <div className="p-8 mt-24">
+                    
                     {/* Filters */}
                     <div className="bg-white shadow-md rounded p-4 mb-4 flex flex-wrap gap-4 mt-4">
                         <select className="border p-2 rounded w-full md:w-1/6" value={gender} onChange={(e) => setGender(e.target.value)}>
