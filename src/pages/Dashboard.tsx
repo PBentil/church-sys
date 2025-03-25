@@ -66,7 +66,7 @@ const Dashboard = () => {
                     <h2 className="text-2xl font-semibold">Welcome to the Dashboard</h2>
                     <p className="text-gray-500">Manage church activities here.</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full ml-8">
                     {[{ icon: faChurch, label: "Dioceses", value: stats.dioceses },
                       { icon: faGlobe, label: "Circuits", value: stats.circuits },
                       { icon: faUsers, label: "Members", value: stats.members },

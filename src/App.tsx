@@ -6,6 +6,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import Dashboard from './pages/Dashboard'
 import Members from './pages/Member'
 import Diocese from './pages/Diocese'
+import Circuits from './pages/Circuits'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/members' element={<Members />} />
       <Route path='/diocese' element={<Diocese />} />
+      <Route path='/circuits' element={<Circuits />} />
     </Routes>
     </>
   )

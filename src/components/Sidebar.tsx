@@ -61,6 +61,7 @@ const Sidebar = () => {
                 {/* Logout Button (Sticks to Bottom) */}
                 <div className="px-4 pb-2 py-2 border-t-1 border-red-500">
                     <Link
+                        
                         to="/login"
                         className="flex  gap-3 p-3 rounded text-center hover:bg-red-500 hover:text-white w-full"
                     >

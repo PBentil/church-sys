@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import Breadcrumbs from "../components/Breadcrumbs";
-import Selector from  "../components/DioceseSelector"
+import TableList from "../components/Table";
 import axios from "axios";
 import DioceseSelector from "../components/DioceseSelector";
+
 
 // Define types
 interface Diocese {
@@ -38,7 +39,7 @@ const Diocese = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen p-6">
+            <div className="lg:ml-56 w-full min-h-screen p-6">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
@@ -122,12 +123,14 @@ const Members = ({ dioceseId }: { dioceseId: string }) => {
     return (
         <div>
             <h2 className="text-lg font-semibold">Members in {dioceseId || "Selected Diocese"}</h2>
-            <ul>
+            {/* <ul>
                 {members.map(member => (
                     <li key={member.id}>{member.name} - {member.gender}</li>
-                ))}
-            </ul>
+            ))}
+            </ul> */}
+     
         </div>
+        
     );
 };
 
