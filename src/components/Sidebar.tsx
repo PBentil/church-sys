@@ -36,21 +36,21 @@ const Sidebar = () => {
                         <FontAwesomeIcon icon={faHome} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Dashboard</span>
                     </Link>
-                    <Link to="/diocese" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link to="/events" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faEarth} size="lg" />
-                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Diocese</span>
+                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>events</span>
                     </Link>
-                    <Link to="/circuits" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link to="/donations" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faGlobe} size="lg" />
-                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Circuits</span>
+                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Donations</span>
                     </Link>
                     <Link to="/members" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faUsers} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Members</span>
                     </Link>
-                    <Link to="/attendance" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link to="/report" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faClipboardList} size="lg" />
-                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Attendance</span>
+                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Reports</span>
                     </Link>
                     <Link to="/settings" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faCog} size="lg" />
