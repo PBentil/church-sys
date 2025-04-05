@@ -38,7 +38,7 @@ const Sidebar = () => {
                     </Link>
                     <Link to="/events" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faEarth} size="lg" />
-                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>events</span>
+                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Events</span>
                     </Link>
                     <Link to="/donations" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faGlobe} size="lg" />
