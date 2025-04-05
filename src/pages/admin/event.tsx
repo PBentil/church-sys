@@ -68,7 +68,6 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Handle Delete action (frontend only)
     const handleDelete = (key: string) => {
-        const updatedEvents = eventData.filter((event) => event.key !== key);
         alert(`Deleted event with key: ${key}`);
     };
 

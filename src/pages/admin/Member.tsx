@@ -1,29 +1,116 @@
 import Sidebar from "../../components/Sidebar.tsx";
 import Topbar from "../../components/Topbar.tsx";
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import Modal from "../../components/Modal.tsx";
+import {Form} from "antd";
+import {useState} from "react";
+import Table from "../../components/Table.tsx";
+import SearchComplete from "../../components/SearchComplete.tsx";
 
-type Member = {
-    id: number;
-    name: string;
-    gender: string;
-    employment_status: string;
-    marital_status: string;
-};
+
 
 const Members = () => {
 
-    // Mock member data for frontend display
-    const members: Member[] = [
-        { id: 1, name: "John Doe", gender: "Male", employment_status: "Employed", marital_status: "Married" },
-        { id: 2, name: "Jane Smith", gender: "Female", employment_status: "Unemployed", marital_status: "Single" },
-        { id: 3, name: "Mark Johnson", gender: "Male", employment_status: "Employed", marital_status: "Divorced" },
-        { id: 4, name: "Emily Davis", gender: "Female", employment_status: "Self-employed", marital_status: "Married" },
-        // Add more mock data as needed
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const membersData = [
+        {
+            key: '1',
+            id: '1',
+            firstName: 'John',
+            lastName: 'Doe',
+            gender: 'Male',
+            role: 'Admin',
+            address: '123 Main St, City, Country',
+        },
+        {
+            key: '2',
+            id: '2',
+            firstName: 'Jane',
+            lastName: 'Smith',
+            gender: 'Female',
+            role: 'Member',
+            address: '456 Oak St, City, Country',
+        },
+        {
+            key: '3',
+            id: '3',
+            firstName: 'Sam',
+            lastName: 'Johnson',
+            gender: 'Male',
+            role: 'Moderator',
+            address: '789 Pine St, City, Country',
+        },
     ];
 
-    // Static filter values (you can replace this with dynamic filtering if needed)
-    const filteredMembers = members;
+// Columns definition for the table
+    const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+        },
+        {
+            title: 'First Name',
+            dataIndex: 'firstName',
+            key: 'firstName',
+        },
+        {
+            title: 'Last Name',
+            dataIndex: 'lastName',
+            key: 'lastName',
+        },
+        {
+            title: 'Gender',
+            dataIndex: 'gender',
+            key: 'gender',
+        },
+        {
+            title: 'Role',
+            dataIndex: 'role',
+            key: 'role',
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+        },
+        {
+            title: 'Actions',
+            key: 'actions',
+            render: (_: any, record: any) => (
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => handleEdit(record)}
+                        className="bg-sky-700 text-white p-2 rounded"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        onClick={() => handleDelete(record.key)}
+                        className="bg-red-700 text-white p-2 rounded"
+                    >
+                        Delete
+                    </button>
+                </div>
+            ),
+        },
+    ];
 
+    // Handle Edit action (frontend only)
+    const handleEdit = (record: any) => {
+        alert(`Edit Member: ${record.firstName} ${record.lastName}`);
+        // Open a modal or handle logic for editing member here
+        setIsModalOpen(true); // If you're opening a modal
+    };
+
+    // Handle Delete action (frontend only)
+    const handleDelete = (key: string) => {
+        alert(`Deleted member with key: ${key}`);
+        // Add delete logic here
+    };
     return (
         <div className="flex">
             <Sidebar />
@@ -32,57 +119,67 @@ const Members = () => {
                 <Breadcrumbs />
 
                 <div className="p-8 mt-24">
+                    <Modal open={isModalOpen} onCancel={()=>setIsModalOpen(false)} title="Member Registration">
+                        <Form onSubmit={()=>setIsModalOpen(true)} layout="vertical" >
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <Form.Item label="First Name" name="First_Name"  rules={[{required: true, message: "Required"}]}>
+                                    <input type="text" className="border rounded-sm p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Last Name" name="Last_name"  rules={[{required: true, message: "Required"}]}>
+                                    <input  type="text" className="border rounded-sm p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Email" name="Email"  rules={[{required: true, message: "Required"}]}>
+                                    <input  type="email" className="border rounded-sm p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Phone Number" name="phone_number"  rules={[{required: true, message: "Required"}]}>
+                                    <input  type="text" className="border rounded-sm p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Gender" name="gender"  rules={[{required: true, message: "Required"}]}>
+                                    <select className="border rounded-sm p-2 w-full">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </Form.Item>
+                                <Form.Item label="Date Of Birth" name="Date"  rules={[{required: true, message: "Required"}]}>
+                                    <input type="Date" className="border rounded-sm p-2 w-full"  />
+                                </Form.Item>
+                                <Form.Item label="Address" name="Address"  rules={[{required: true, message: "Required"}]}>
+                                    <input  type="text" className="border rounded-sm p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Role" name="role"  rules={[{required: true, message: "Required"}]}>
+                                    <select className="border rounded-sm p-2 w-full">
+                                        <option value="">Select Role</option>
+                                        <option value="Pastor">Pastor</option>
+                                        <option value="Presiding">Presiding Elder</option>
+                                        <option value="Elder">Elder</option>
+                                        <option value="Deacon">Deacon</option>
+                                        <option value="Deaconess">Deconess</option>
+                                        <option value="Executive">Executive</option>
+                                        <option value="member">Member</option>
+                                    </select>
+                                </Form.Item>
+                            </div><br />
+                            <div className="flex justify-end">
+                                <button type="submit" className="bg-sky-700 text-white p-2 rounded ">Add Member</button>
+                            </div>
+
+                        </Form>
+                    </Modal>
                     {/* Filters */}
-                    <div className="bg-white shadow-md rounded p-4 mb-4 flex flex-wrap gap-4 mt-4">
-                        <select className="border p-2 rounded w-full md:w-1/6">
-                            <option value="">Genders</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
+                    <div className="flex justify-between">
+                        <h1 className="font-bold text-xl ">Members Management</h1>
+                        <div className="flex justify-end gap-5" >
+                            <SearchComplete placeholder="Search for members..." />
+                            <button className="bg-sky-700 text-white lg:p-2 rounded-lg" onClick={()=>setIsModalOpen(true)}><FontAwesomeIcon icon={faPlus} /> Add Members</button>
+                        </div>
 
-                        <select className="border p-2 rounded w-full md:w-1/6">
-                            <option value="">Marital Status</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                        </select>
-
-                        <input type="text" placeholder="Search by name" className="border p-2 rounded w-full md:w-96 md:px-4" />
                     </div>
 
+
                     {/* Members Table */}
-                    <div className="bg-white shadow-md rounded p-4 overflow-x-auto">
-                        <table className="w-full text-left border-collapse">
-                            <thead>
-                            <tr className="bg-gray-100 text-sky-700">
-                                <th className="p-3 border-r">Name</th>
-                                <th className="p-3 border-r">Gender</th>
-                                <th className="p-3 border-r">Employment Status</th>
-                                <th className="p-3 border-r">Marital Status</th>
-                                <th className="p-3 border-r">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {filteredMembers.length > 0 ? (
-                                filteredMembers.map((member) => (
-                                    <tr key={member.id} className="hover:bg-gray-50 p-2">
-                                        <td className="p-3">{member.name}</td>
-                                        <td className="p-3">{member.gender}</td>
-                                        <td className="p-3">{member.employment_status}</td>
-                                        <td className="p-3">{member.marital_status}</td>
-                                        <td className="p-3 flex gap-2">
-                                            <button className="bg-sky-700 text-white px-3 py-1 rounded">Edit</button>
-                                            <button className="bg-red-700 text-white px-3 py-1 rounded">Delete</button>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan={5} className="text-center p-4">No members found.</td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </table>
+                    <div>
+                        <Table  data={membersData} columns={columns} />
                     </div>
                 </div>
             </div>
