@@ -8,6 +8,7 @@ import Dashboard from "./pages/admin/Dashboard.tsx";
 import Members from "./pages/admin/Member.tsx";
 import Events from "./pages/admin/event.tsx";
 import Donations from "./pages/admin/Donations.tsx";
+import Report from "./pages/admin/Report";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/members' element={<Members />} />
           <Route path='/events' element={<Events />} />
             <Route path='/donations' element={<Donations />} />
+            <Route path='/reports' element={<Report />} />
         </Routes>
       </>
   )

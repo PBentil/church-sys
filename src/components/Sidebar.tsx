@@ -48,7 +48,7 @@ const Sidebar = () => {
                         <FontAwesomeIcon icon={faUsers} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Members</span>
                     </Link>
-                    <Link to="/report" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link to="/reports" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
                         <FontAwesomeIcon icon={faClipboardList} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Reports</span>
                     </Link>
