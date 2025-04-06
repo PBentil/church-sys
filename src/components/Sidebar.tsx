@@ -2,10 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faHome, faCog, faEarth, faGlobe, faUsers, faClipboardList, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import CustomModal from "./Modal.tsx";
 
 const Sidebar = () => {
     const [isOpen] = useState(true); // Default open on desktop
     const [isMobileOpen, setIsMobileOpen] = useState(false); // For mobile toggle
+
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+    const handleLogout = () => {
+        window.location.href = '/login'; // 👈 Redirect to login
+    };
 
     return (
         <>
@@ -59,22 +66,42 @@ const Sidebar = () => {
                 </nav>
 
                 {/* Logout Button (Sticks to Bottom) */}
-                <div className="px-4 pb-2 py-2 border-t-1 border-red-500">
-                    <Link
-                        
-                        to="/login"
-                        className="flex  gap-3 p-3 rounded text-center hover:bg-red-500 hover:text-white w-full"
+                <div className="px-4 pb-2 py-2 border-t border-red-500">
+                    <button
+                        onClick={() => setIsLogoutModalOpen(true)}
+                        className="flex items-center justify-center gap-2 p-2 text-red-600 text-sm rounded hover:bg-red-100 w-full"
                     >
-                        <FontAwesomeIcon icon={faRightFromBracket} size="lg" />
+                        <FontAwesomeIcon icon={faRightFromBracket} size="sm" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Logout</span>
-                    </Link>
+                    </button>
                 </div>
+
 
                 {/* Mobile Overlay */}
                 {isMobileOpen && (
                     <div className="fixed inset-0  opacity-50 md:hidden z-40" onClick={() => setIsMobileOpen(false)}></div>
                 )}
             </div>
+
+            <CustomModal open={isLogoutModalOpen} onCancel={() => setIsLogoutModalOpen(false)} title="Confirm Logout">
+                <div className="flex flex-col gap-4">
+                    <p>Are you sure you want to logout?</p>
+                    <div className="flex justify-end gap-2">
+                        <button
+                            onClick={() => setIsLogoutModalOpen(false)}
+                            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleLogout}
+                            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
+                            Yes, Logout
+                        </button>
+                    </div>
+                </div>
+            </CustomModal>
         </>
     );
 };
