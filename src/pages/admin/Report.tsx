@@ -2,12 +2,10 @@ import Sidebar from "../../components/Sidebar.tsx";
 import Topbar from "../../components/Topbar.tsx";
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 import SearchComplete from "../../components/SearchComplete.tsx";
-import {faChurch, faClipboardList, faGlobe, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useState} from "react";
-import Table from "../../components/Table.tsx";
-
-
+import { faChurch, faClipboardList, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import TableComponent from "../../components/Table.tsx";  // Import TableComponent
 
 interface Stats {
     events: number;
@@ -55,14 +53,14 @@ const Report = () => {
             key: 'status',
             render: (status: string) => (
                 <span className={`px-2 py-1 rounded text-white ${status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}>
-        {status}
-      </span>
+                    {status}
+                </span>
             ),
         },
         {
             title: 'Actions',
             key: 'actions',
-            render: (_: any, record: any) => (
+            render: () => (
                 <div className="flex gap-2">
                     <button className="bg-sky-700 text-white px-3 py-1 rounded">View</button>
                     <button className="bg-gray-500 text-white px-3 py-1 rounded">Download</button>
@@ -70,8 +68,6 @@ const Report = () => {
             ),
         },
     ];
-
-    
 
     const reportData = [
         {
@@ -122,27 +118,29 @@ const Report = () => {
         members: 0,
         attendance: 0,
     });
-return(
-    <div className="flex">
-        <Sidebar />
-        <div className="lg:ml-64 w-full min-h-screen p-6">
-            <Topbar toggleSidebar={() => { }} />
-            <Breadcrumbs />
 
-            <div className="p-8 mt-24">
-                <div className="flex justify-between">
-                    <h1 className="font-bold text-2xl mt-2">Reports</h1>
-                    <div className="flex flex-wrap justify-end gap-4">
-                        <SearchComplete placeholder="Search for reports..." />
-                        <select className="border rounded-sm p-2 w-56">
-                            <option value="">Select...</option>
-                            <option value="Title">Title</option>
-                            <option value="Offering">Offering</option>
-                            <option value="Contribution">Contribution</option>
-                        </select>
-                        <button className="bg-sky-700 text-white p-2 rounded-sm" >Download Report</button>
+    return (
+        <div className="flex">
+            <Sidebar />
+            <div className="lg:ml-64 w-full min-h-screen p-6">
+                <Topbar toggleSidebar={() => { }} />
+                <Breadcrumbs />
+
+                <div className="p-8 mt-24">
+                    <div className="flex justify-between">
+                        <h1 className="font-bold text-2xl mt-2">Reports</h1>
+                        <div className="flex flex-wrap justify-end gap-4">
+                            <SearchComplete placeholder="Search for reports..." />
+                            <select className="border rounded-sm p-2 w-56">
+                                <option value="">Select...</option>
+                                <option value="Title">Title</option>
+                                <option value="Offering">Offering</option>
+                                <option value="Contribution">Contribution</option>
+                            </select>
+                            <button className="bg-sky-700 text-white p-2 rounded-sm">Download Report</button>
+                        </div>
                     </div>
-                </div><br /><br />
+                    <br /><br />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full ">
                         {[{ icon: faChurch, label: "Events", value: stats.events },
                             { icon: faGlobe, label: "Finances", value: stats.finances },
@@ -155,16 +153,16 @@ return(
                                 <p className="text-sm">{stat.label}</p>
                             </div>
                         ))}
-                    </div><br />
-                <div>
-                    <Table title="Report List" columns={reportColumns} data={reportData}  />
-                </div>
+                    </div>
+                    <br />
+                    <div>
+                        <TableComponent title="Report List" columns={reportColumns} data={reportData} />
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
-
-)
+    )
 };
 
 export default Report;
