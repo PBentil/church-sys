@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faHome, faCog, faEarth, faGlobe, faUsers, faClipboardList, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import CustomModal from "./Modal.tsx";
+import CustomDrawer from "./Drawer.tsx";
+import Settings from "../pages/Settings.tsx";
 
 const Sidebar = () => {
     const [isOpen] = useState(true); // Default open on desktop
     const [isMobileOpen, setIsMobileOpen] = useState(false); // For mobile toggle
 
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);  // <-- Drawer state
 
     const handleLogout = () => {
         window.location.href = '/login'; // 👈 Redirect to login
@@ -59,17 +62,19 @@ const Sidebar = () => {
                         <FontAwesomeIcon icon={faClipboardList} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Reports</span>
                     </Link>
-                    <Link to="/settings" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
-                        <FontAwesomeIcon icon={faCog} size="lg" />
-                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Settings</span>
-                    </Link>
+                    <button
+                        onClick={() => setIsSettingsOpen(true)}
+                        className="flex items-center gap-3 p-3 hover:bg-sky-700 hover:text-white text-left rounded"
+                    >
+                        <FontAwesomeIcon icon={faCog} /> Settings
+                    </button>
                 </nav>
 
                 {/* Logout Button (Sticks to Bottom) */}
-                <div className="px-4 pb-2 py-2 border-t border-red-500">
+                <div className="px-4 pb-2 py-2 border-t border-red-500 ">
                     <button
                         onClick={() => setIsLogoutModalOpen(true)}
-                        className="flex items-center justify-center gap-2 p-2 text-red-600 text-sm rounded hover:bg-red-100 w-full"
+                        className="flex items-center justify-center gap-2 p-2 text-red-600 text-sm rounded hover:bg-red-100 w-full "
                     >
                         <FontAwesomeIcon icon={faRightFromBracket} size="sm" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Logout</span>
@@ -102,6 +107,15 @@ const Sidebar = () => {
                     </div>
                 </div>
             </CustomModal>
+
+
+            <CustomDrawer
+                open={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
+                title="Settings"
+            >
+                <Settings />
+            </CustomDrawer>
         </>
     );
 };

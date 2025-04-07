@@ -9,6 +9,7 @@ import Members from "./pages/admin/Member.tsx";
 import Events from "./pages/admin/event.tsx";
 import Donations from "./pages/admin/Donations.tsx";
 import Report from "./pages/admin/Report";
+import Settings from "./pages/Settings.tsx";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/events' element={<Events />} />
             <Route path='/donations' element={<Donations />} />
             <Route path='/reports' element={<Report />} />
+            <Route path='/settings' element={<Settings />} />
         </Routes>
       </>
   )
