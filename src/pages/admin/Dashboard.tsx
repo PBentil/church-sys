@@ -8,7 +8,7 @@ import "react-calendar/dist/Calendar.css";
 import { faChurch, faClipboardList, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// Define the type for the stats state
+
 interface Stats {
     events: number;
     finances: number;
@@ -17,7 +17,7 @@ interface Stats {
 }
 
 const Dashboard = () => {
-    // Set up state with the correct types
+
     const [stats, setStats] = useState<Stats>({
         events: 0,
         finances: 0,
@@ -35,7 +35,7 @@ const Dashboard = () => {
         { name: "Attendance", value: stats.attendance, color: "#EF4444" },
     ];
 
-    // Fetch data and update stats
+
     useEffect(() => {
         const fetchStats = async () => {
             setLoading(true);
@@ -61,14 +61,14 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full h-screen">
+            <div className="lg:ml-64 w-full h-screen  ">
                 <Topbar toggleSidebar={() => {}} />
                 <Breadcrumbs />
-                <div className="p-8 mt-24">
+                <div className="p-8 mt-24 ">
                     <h2 className="text-2xl font-semibold">Welcome to the Dashboard</h2>
                     <p className="text-gray-500">Manage church activities here.</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full ml-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6  ml-8">
                     {[{ icon: faChurch, label: "Events", value: stats.events },
                         { icon: faGlobe, label: "Finances", value: stats.finances },
                         { icon: faUsers, label: "Members", value: stats.members },

@@ -9,9 +9,9 @@ interface TableComponentProps {
 
 const TableComponent: React.FC<TableComponentProps> = ({ title, columns, data }) => {
     return (
-        <div className="bg-white p-4 shadow-lg rounded-lg">
+        <div className="bg-white p-4 shadow-lg rounded-lg w-full">
             {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
-            <Table columns={columns} dataSource={data} pagination={true} />
+            <Table columns={columns} dataSource={data} pagination={true}   scroll={{ x: 'max-content' }} />
         </div>
     );
 };

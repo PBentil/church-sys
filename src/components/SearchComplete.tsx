@@ -53,7 +53,7 @@ const SearchComplete: React.FC<AutoCompleteComponentProps> = ({ placeholder }) =
     return (
         <AutoComplete
             popupMatchSelectWidth={252}
-            style={{ width: 500 }}
+            style={{ width: 300 }}
             options={options}
             onSelect={onSelect}
             onSearch={handleSearch}

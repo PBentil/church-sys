@@ -107,7 +107,7 @@ const Donations = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen p-6">
+            <div className="lg:ml-64 w-full min-h-screen ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
@@ -152,18 +152,23 @@ const Donations = () => {
                         </Form>
                     </Modal>
                     {/* Filters */}
-                    <div className="flex justify-between">
-                        <h1 className="font-bold text-xl ">Donations Management</h1>
-                        <div className="flex justify-end gap-5" >
-                            <SearchComplete placeholder="Search for members..." />
-                            <button className="bg-sky-700 text-white lg:p-2 rounded-lg" onClick={()=>setIsModalOpen(true)}><FontAwesomeIcon icon={faPlus} /> Add Donations</button>
-                        </div>
+                    <div className="flex flex-col lg:flex-row justify-between gap-4 lg:items-center">
+                        <h1 className="font-bold text-xl">Donations Management</h1>
 
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <SearchComplete placeholder="Search for members..."  />
+                            <button
+                                className="bg-sky-700 text-white px-3 py-2 rounded-lg"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                <FontAwesomeIcon icon={faPlus} /> Add Donations
+                            </button>
+                        </div>
                     </div>
 
 
                     {/* Members Table */}
-                    <div>
+                    <div className="w-full h-screen mt-6">
                         <Table  data={Donations} columns={columns} />
                     </div>
                 </div>

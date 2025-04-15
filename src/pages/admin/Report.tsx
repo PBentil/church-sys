@@ -122,24 +122,30 @@ const Report = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen p-6">
+            <div className="lg:ml-64 w-full min-h-screen ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
                 <div className="p-8 mt-24">
-                    <div className="flex justify-between">
+                    <div className="flex flex-col lg:flex-row justify-between gap-4 lg:items-center">
                         <h1 className="font-bold text-2xl mt-2">Reports</h1>
-                        <div className="flex flex-wrap justify-end gap-4">
+
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 flex-wrap">
                             <SearchComplete placeholder="Search for reports..." />
-                            <select className="border rounded-sm p-2 w-56">
+
+                            <select className="border rounded-sm p-2 w-full sm:w-56">
                                 <option value="">Select...</option>
                                 <option value="Title">Title</option>
                                 <option value="Offering">Offering</option>
                                 <option value="Contribution">Contribution</option>
                             </select>
-                            <button className="bg-sky-700 text-white p-2 rounded-sm">Download Report</button>
+
+                            <button className="bg-sky-700 text-white px-4 py-2 rounded-sm w-full sm:w-auto">
+                                Download Report
+                            </button>
                         </div>
                     </div>
+
                     <br /><br />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full ">
                         {[{ icon: faChurch, label: "Events", value: stats.events },
