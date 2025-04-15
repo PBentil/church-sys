@@ -104,7 +104,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full h-screen">
+            <div className=" w-full h-screen">
                 <Topbar toggleSidebar={function(): void {
                     throw new Error("Function not implemented.");
                 } } />
@@ -143,8 +143,6 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
                     </div>
                 </div>
-
-
             </div>
 
         </div>

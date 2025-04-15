@@ -114,7 +114,7 @@ const Members = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen ">
+            <div className=" w-full min-h-screen ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
@@ -184,7 +184,7 @@ const Members = () => {
 
 
                     {/* Members Table */}
-                    <div>
+                    <div className="mt-6">
                         <Table  data={membersData} columns={columns} />
                     </div>
                 </div>

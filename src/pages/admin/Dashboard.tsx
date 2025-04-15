@@ -61,20 +61,20 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full h-screen  ">
+            <div className="w-full h-screen  ">
                 <Topbar toggleSidebar={() => {}} />
                 <Breadcrumbs />
                 <div className="p-8 mt-24 ">
                     <h2 className="text-2xl font-semibold">Welcome to the Dashboard</h2>
                     <p className="text-gray-500">Manage church activities here.</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6  ml-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full p-5">
                     {[{ icon: faChurch, label: "Events", value: stats.events },
                         { icon: faGlobe, label: "Finances", value: stats.finances },
                         { icon: faUsers, label: "Members", value: stats.members },
                         { icon: faClipboardList, label: "Attendance", value: stats.attendance }
                     ].map((stat, index) => (
-                        <div key={index} className="p-4 text-sky-700 rounded-lg shadow-md">
+                        <div key={index} className="p-4 text-sky-700 rounded-lg bg-white shadow-md">
                             <FontAwesomeIcon icon={stat.icon} className="mr-2 text-2xl" />
                             <p className="text-lg font-bold">{stat.value}</p>
                             <p className="text-sm">{stat.label}</p>

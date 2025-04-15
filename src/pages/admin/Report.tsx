@@ -122,7 +122,7 @@ const Report = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen ">
+            <div className="w-full h-screen">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
@@ -147,13 +147,13 @@ const Report = () => {
                     </div>
 
                     <br /><br />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full ">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full ">
                         {[{ icon: faChurch, label: "Events", value: stats.events },
                             { icon: faGlobe, label: "Finances", value: stats.finances },
                             { icon: faUsers, label: "Members", value: stats.members },
                             { icon: faClipboardList, label: "Attendance", value: stats.attendance }
                         ].map((stat, index) => (
-                            <div key={index} className="p-4 text-sky-700 rounded-lg shadow-md">
+                            <div key={index} className="p-4 text-sky-700 rounded-lg bg-white shadow-md">
                                 <FontAwesomeIcon icon={stat.icon} className="mr-2 text-2xl" />
                                 <p className="text-lg font-bold">{stat.value}</p>
                                 <p className="text-sm">{stat.label}</p>
@@ -161,10 +161,9 @@ const Report = () => {
                         ))}
                     </div>
                     <br />
-                    <div>
+                    <div className="overflow-x-auto w-full">
                         <TableComponent title="Report List" columns={reportColumns} data={reportData} />
                     </div>
-
                 </div>
             </div>
         </div>

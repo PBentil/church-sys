@@ -7,14 +7,20 @@ import CustomDrawer from "./Drawer.tsx";
 import Settings from "../pages/Settings.tsx";
 
 const Sidebar = () => {
-    const [isOpen] = useState(true); // Default open on desktop
-    const [isMobileOpen, setIsMobileOpen] = useState(false); // For mobile toggle
+
+    const [isOpen] = useState(true);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
 
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);  // <-- Drawer state
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     const handleLogout = () => {
-        window.location.href = '/login'; // 👈 Redirect to login
+        window.location.href = '/login';
+    };
+
+    // Close mobile sidebar after navigation
+    const handleLinkClick = () => {
+        setIsMobileOpen(false);
     };
 
     return (
@@ -42,51 +48,77 @@ const Sidebar = () => {
 
                 {/* Navigation Links */}
                 <nav className="flex flex-col gap-4 px-4 mt-4 flex-1">
-                    <Link to="/dashboard" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link
+                        to="/dashboard"
+                        className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
+                        onClick={handleLinkClick}
+                    >
                         <FontAwesomeIcon icon={faHome} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Dashboard</span>
                     </Link>
-                    <Link to="/events" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link
+                        to="/events"
+                        className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
+                        onClick={handleLinkClick}
+                    >
                         <FontAwesomeIcon icon={faEarth} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Events</span>
                     </Link>
-                    <Link to="/donations" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link
+                        to="/donations"
+                        className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
+                        onClick={handleLinkClick}
+                    >
                         <FontAwesomeIcon icon={faGlobe} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Donations</span>
                     </Link>
-                    <Link to="/members" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link
+                        to="/members"
+                        className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
+                        onClick={handleLinkClick}
+                    >
                         <FontAwesomeIcon icon={faUsers} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Members</span>
                     </Link>
-                    <Link to="/reports" className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white">
+                    <Link
+                        to="/reports"
+                        className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
+                        onClick={handleLinkClick}
+                    >
                         <FontAwesomeIcon icon={faClipboardList} size="lg" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Reports</span>
                     </Link>
                     <button
-                        onClick={() => setIsSettingsOpen(true)}
-                        className="flex items-center gap-3 p-3 hover:bg-sky-700 hover:text-white text-left rounded"
+                        onClick={() => {
+                            setIsSettingsOpen(true);
+                            setIsMobileOpen(false); // Close mobile sidebar when opening settings
+                        }}
+                        className="flex items-center gap-3 p-3 hover:bg-sky-700 hover:text-white text-left rounded w-full"
                     >
-                        <FontAwesomeIcon icon={faCog} /> Settings
+                        <FontAwesomeIcon icon={faCog} />
+                        <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Settings</span>
                     </button>
                 </nav>
 
                 {/* Logout Button (Sticks to Bottom) */}
-                <div className="px-4 pb-2 py-2 border-t border-red-500 ">
+                <div className="px-4 pb-2 py-2 border-t border-red-500">
                     <button
                         onClick={() => setIsLogoutModalOpen(true)}
-                        className="flex items-center justify-center gap-2 p-2 text-red-600 text-sm rounded hover:bg-red-100 w-full "
+                        className="flex items-center justify-center gap-2 p-2 text-red-600 text-sm rounded hover:bg-red-100 w-full"
                     >
                         <FontAwesomeIcon icon={faRightFromBracket} size="sm" />
                         <span className={`${isOpen ? "inline" : "hidden"} transition-all duration-300`}>Logout</span>
                     </button>
                 </div>
-
-
-                {/* Mobile Overlay */}
-                {isMobileOpen && (
-                    <div className="fixed inset-0  opacity-50 md:hidden z-40" onClick={() => setIsMobileOpen(false)}></div>
-                )}
             </div>
+
+            {/* Mobile Overlay - only for closing the sidebar */}
+            {isMobileOpen && (
+                <div
+                    className="fixed inset-0 bg-black opacity-50 md:hidden z-40"
+                    onClick={() => setIsMobileOpen(false)}
+                ></div>
+            )}
 
             <CustomModal open={isLogoutModalOpen} onCancel={() => setIsLogoutModalOpen(false)} title="Confirm Logout">
                 <div className="flex flex-col gap-4">
@@ -107,7 +139,6 @@ const Sidebar = () => {
                     </div>
                 </div>
             </CustomModal>
-
 
             <CustomDrawer
                 open={isSettingsOpen}

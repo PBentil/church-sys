@@ -107,7 +107,7 @@ const Donations = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <div className="lg:ml-64 w-full min-h-screen ">
+            <div className=" w-full min-h-screen ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
