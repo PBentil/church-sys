@@ -2,58 +2,74 @@ import Sidebar from "../../components/Sidebar.tsx";
 import Topbar from "../../components/Topbar";
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 import Table from "../../components/Table.tsx";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import Modal from "../../components/Modal.tsx";
 import { Form } from "antd";
 
+const Events = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-const Events= () => {
-const [isModalOpen, setIsModalOpen] = useState(false);
     const columns = [
         {
             title: 'No.',
             key: 'index',
-            render: ( index: number) => index + 1, // Adding 1 to start from 1 instead of 0
-         },
+            render: (index: number) => index + 1, // Adding 1 to start from 1 instead of 0
+            responsive: ['md'],
+        },
         {
             title: 'Event Name',
             dataIndex: 'eventName',
             key: 'eventName',
+            responsive: ['xs'],
         },
         {
             title: 'Location',
             dataIndex: 'location',
             key: 'location',
+            responsive: ['sm'],
         },
         {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
             render: (text: string) => <span>{new Date(text).toLocaleDateString()}</span>, // format date
+            responsive: ['sm'],
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
+            responsive: ['md'],
+            // Truncate long descriptions
+            render: (text: string) => (
+                <div className="max-w-xs truncate" title={text}>
+                    {text}
+                </div>
+            ),
         },
         {
             title: 'Actions',
             key: 'actions',
+            responsive: ['xs'],
             render: (_: any, record: any) => (
-                <div className="flex space-x-2">
+                <div className="flex space-x-1 md:space-x-2">
                     <button
                         onClick={() => handleEdit(record)}
-                        className="bg-sky-700 text-white p-2 rounded"
+                        className="bg-sky-700 text-white p-1 md:p-2 rounded text-xs md:text-sm"
+                        aria-label="Edit"
                     >
-                        Edit
+                        <FontAwesomeIcon icon={faEdit} className="mr-0 md:mr-1" />
+                        <span className="hidden md:inline">Edit</span>
                     </button>
                     <button
                         onClick={() => handleDelete(record.key)}
-                        className="bg-red-700 text-white p-2 rounded"
+                        className="bg-red-700 text-white p-1 md:p-2 rounded text-xs md:text-sm"
+                        aria-label="Delete"
                     >
-                        Delete
+                        <FontAwesomeIcon icon={faTrash} className="mr-0 md:mr-1" />
+                        <span className="hidden md:inline">Delete</span>
                     </button>
                 </div>
             ),
@@ -101,51 +117,75 @@ const [isModalOpen, setIsModalOpen] = useState(false);
             description: 'An expo focusing on health, fitness, wellness, and healthy living.',
         },
     ];
+
     return (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
             <Sidebar />
-            <div className=" w-full h-screen">
+            <div className="flex-1 w-full">
                 <Topbar toggleSidebar={function(): void {
                     throw new Error("Function not implemented.");
-                } } />
+                }} />
                 <Breadcrumbs />
-                <div className="p-8 mt-24" >
-                    <div className="flex items-center justify-between w-full p-4">
-                        <h1 className="font-semibold text-xl">Welcome to event sections </h1>
-                        <button className="bg-sky-700 text-white lg:p-2 rounded-lg" onClick={()=>setIsModalOpen(true)}><FontAwesomeIcon icon={faPlus} /> Add Event</button>
+
+                <div className="p-2 sm:p-4 md:p-8 mt-16 md:mt-24">
+
+
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full p-2 mt-6 sm:p-4 mb-4">
+                        <h1 className="font-semibold text-lg md:text-xl mb-2 sm:mb-0">Event Management</h1>
+                        <button
+                            className="bg-sky-700 text-white px-3 py-2 rounded-lg text-sm flex items-center"
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            <FontAwesomeIcon icon={faPlus} className="mr-2" />
+                            <span>Add Event</span>
+                        </button>
                     </div>
-                    <div>
+
+                    <div className="overflow-x-auto bg-white rounded-lg shadow">
                         <Table title="Events" columns={columns} data={eventData} />
                     </div>
-                    <div>
-                        <Modal open={isModalOpen} onCancel={()=>setIsModalOpen(false)} title="Add Event">
-                           <Form onSubmit={()=>setIsModalOpen(true)} layout="vertical" >
-                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                               <Form.Item label="Event" name="Event"  rules={[{required: true, message: "Required"}]}>
-                                   <input type="text" className="border rounded-sm p-2 w-full" />
-                               </Form.Item>
-                               <Form.Item label="Location" name="Location"  rules={[{required: true, message: "Required"}]}>
-                                   <input  type="text" className="border rounded-sm p-2 w-full" />
-                               </Form.Item>
-                               <Form.Item label="Date" name="Date"  rules={[{required: true, message: "Required"}]}>
-                                   <input type="Date" className="border rounded-sm p-2 w-full"  />
-                               </Form.Item>
-                                   <Form.Item label="Description" name="Tags"  rules={[{required: true, message: "Required"}]}>
-                                       <input className="border rounded-sm p-2 w-full" />
-                                   </Form.Item>
-                               </div><br />
-                               <div className="flex justify-end">
-                                   <button type="submit" className="bg-sky-700 text-white p-2 rounded ">Add Event</button>
-                               </div>
 
-                           </Form>
-                        </Modal>
-
-                    </div>
+                    <Modal open={isModalOpen} onCancel={() => setIsModalOpen(false)} title="Add Event">
+                        <Form
+                            onSubmit={() => setIsModalOpen(false)}
+                            layout="vertical"
+                            className="max-h-[80vh] overflow-y-auto"
+                        >
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <Form.Item label="Event Name" name="eventName" rules={[{required: true, message: "Required"}]}>
+                                    <input type="text" className="border rounded-md p-2 w-full" placeholder="Enter event name" />
+                                </Form.Item>
+                                <Form.Item label="Location" name="location" rules={[{required: true, message: "Required"}]}>
+                                    <input type="text" className="border rounded-md p-2 w-full" placeholder="Enter location" />
+                                </Form.Item>
+                                <Form.Item label="Date" name="date" rules={[{required: true, message: "Required"}]}>
+                                    <input type="date" className="border rounded-md p-2 w-full" />
+                                </Form.Item>
+                                <Form.Item label="Description" name="description" rules={[{required: true, message: "Required"}]}>
+                                    <textarea
+                                        className="border rounded-md p-2 w-full h-24"
+                                        placeholder="Enter event description"
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="flex justify-end gap-2 mt-4">
+                                <button
+                                    type="button"
+                                    className="bg-gray-300 text-gray-700 p-2 rounded"
+                                    onClick={() => setIsModalOpen(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button type="submit" className="bg-sky-700 text-white p-2 rounded">
+                                    Add Event
+                                </button>
+                            </div>
+                        </Form>
+                    </Modal>
                 </div>
             </div>
-
         </div>
     );
 }
+
 export default Events;

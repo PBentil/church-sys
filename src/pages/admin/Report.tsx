@@ -5,7 +5,7 @@ import SearchComplete from "../../components/SearchComplete.tsx";
 import { faChurch, faClipboardList, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import TableComponent from "../../components/Table.tsx";  // Import TableComponent
+import Table from "../../components/Table.tsx";
 
 interface Stats {
     events: number;
@@ -120,13 +120,13 @@ const Report = () => {
     });
 
     return (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
             <Sidebar />
-            <div className="w-full h-screen">
+            <div className="flex-1 w-full ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
-                <div className="p-8 mt-24">
+                    <div className="p-8 mt-24">
                     <div className="flex flex-col lg:flex-row justify-between gap-4 lg:items-center">
                         <h1 className="font-bold text-2xl mt-2">Reports</h1>
 
@@ -161,8 +161,8 @@ const Report = () => {
                         ))}
                     </div>
                     <br />
-                    <div className="overflow-x-auto w-full">
-                        <TableComponent title="Report List" columns={reportColumns} data={reportData} />
+                    <div className="overflow-x-auto bg-white rounded-lg shadow">
+                        <Table title="Report List" columns={reportColumns} data={reportData} />
                     </div>
                 </div>
             </div>

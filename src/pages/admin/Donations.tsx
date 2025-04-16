@@ -164,11 +164,8 @@ const Donations = () => {
                                 <FontAwesomeIcon icon={faPlus} /> Add Donations
                             </button>
                         </div>
-                    </div>
-
-
-                    {/* Members Table */}
-                    <div className="w-full h-screen mt-6">
+                    </div><br />
+                    <div className="overflow-x-auto bg-white rounded-lg shadow">
                         <Table  data={Donations} columns={columns} />
                     </div>
                 </div>
