@@ -60,7 +60,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar role="admin" />
             <div className="w-full h-screen  ">
                 <Topbar toggleSidebar={() => {}} />
                 <Breadcrumbs />

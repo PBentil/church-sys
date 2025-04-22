@@ -10,6 +10,7 @@ import Donations from "./pages/admin/Donations";
 import Report from "./pages/admin/Report";
 import Settings from "./pages/Settings";
 import MainLayout from "./pages/MainLayout.tsx";
+import MemberDashboard from "./pages/members /Memdash.tsx";
 
 function App() {
     return (
@@ -65,6 +66,14 @@ function App() {
                 element={
                     <MainLayout>
                         <Settings />
+                    </MainLayout>
+                }
+            />
+            <Route
+                path="/MemberDashboard"
+                element={
+                    <MainLayout>
+                        <MemberDashboard />
                     </MainLayout>
                 }
             />

@@ -120,7 +120,7 @@ const Events = () => {
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
-            <Sidebar />
+            <Sidebar role="admin" />
             <div className="flex-1 w-full">
                 <Topbar toggleSidebar={function(): void {
                     throw new Error("Function not implemented.");

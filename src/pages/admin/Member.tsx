@@ -113,7 +113,7 @@ const Members = () => {
     };
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar role="admin" />
             <div className=" w-full min-h-screen ">
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
