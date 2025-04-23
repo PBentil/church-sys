@@ -44,7 +44,11 @@ const Sidebar = ({ role }: SidebarProps) => {
     ];
 
     const memberLinks = [
-        { to: "/MemberDashboard", label: "Dashboard", icon: faClipboardList },
+        { to: "/MemberDashboard", label: "Dashboard", icon: faHome },
+        { to: "/MembersEvents", label: "Events", icon: faClipboardList },
+        {to: "/MembersDonations", label: "Donations", icon: faGlobe },
+        { to: "/MembersAnnouncements", label: "Announcements", icon: faClipboardList },
+
 
     ];
 

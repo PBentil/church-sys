@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar.tsx";
 import Topbar from "../../components/Topbar.tsx";
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
+import Modal from "../../components/Modal.tsx";
+import {Form} from "antd";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCog, faPlus} from "@fortawesome/free-solid-svg-icons";
+import CustomDrawer from "../../components/Drawer.tsx";
+import Settings from "../Settings.tsx";
+
+
 
 interface Donation {
     date: string;
@@ -17,6 +25,16 @@ interface Event {
 const MemberDashboard = () => {
     const [donations, setDonations] = useState<Donation[]>([]);
     const [events, setEvents] = useState<Event[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const [isOpen] = useState(true);
+
+
+
+
+
+
 
     useEffect(() => {
         // Simulate fetch from API
@@ -44,7 +62,7 @@ const MemberDashboard = () => {
                 <h1 className="text-2xl font-bold">Welcome back!</h1>
                 <p className="text-gray-600">Here’s what’s coming up in your church life.</p>
             </div>
-            <div className="flex justify-between gap-5">
+            <div className="flex flex-col md:flex-row justify-between gap-5">
 
             {/* Upcoming Events */}
             <div className="bg-white p-4 rounded shadow-md w-full">
@@ -90,6 +108,102 @@ const MemberDashboard = () => {
                     - Bible Study every Wednesday @ 6 PM.
                 </p>
             </div>
+                {/* Quick Links */}
+                <div className="bg-white p-4 rounded shadow-md w-full">
+                    <h2 className="text-lg font-semibold mb-2">Quick Links</h2>
+                    <ul className="space-y-2">
+                        <li>
+                            <a href="/profile" className="text-sky-700 hover:underline">
+                                Edit Profile
+                            </a>
+                        </li>
+                        <li>
+                            <button
+                                className="text-sky-700 hover:underline"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                <FontAwesomeIcon icon={faPlus} /> Add Donations
+                            </button>
+                        </li>
+                        <li>
+                            <a href="/MembersEvents" className="text-sky-700 hover:underline">
+                                View Events
+                            </a>
+                        </li>
+                        <li>
+                            <button
+                                onClick={() => {
+                                    setIsSettingsOpen(true);
+                                    setIsMobileOpen(false);
+                                }}
+                                className="text-sky-700 hover:underline" >
+                                <span
+                                    className={`${
+                                        isOpen ? "inline" : "hidden"
+                                    } transition-all duration-300`}
+                                >
+                                              <FontAwesomeIcon icon={faCog} /> Settings
+            </span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                {isMobileOpen && (
+                    <div
+                        className="fixed inset-0 bg-black opacity-50 md:hidden z-40"
+                        onClick={() => setIsMobileOpen(false)}
+                    ></div>
+                )}
+
+                <Modal open={isModalOpen} onCancel={()=>setIsModalOpen(false)} title="Donation">
+                    <Form onSubmit={()=>setIsModalOpen(true)} layout="vertical" >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <Form.Item label="Donar Name" name="Donar_Name"  rules={[{required: true, message: "Required"}]}>
+                                <input type="text" className="border rounded-sm p-2 w-full" />
+                            </Form.Item>
+                            <Form.Item label="Amount" name="Amount"  rules={[{required: true, message: "Required"}]}>
+                                <input  type="text" className="border rounded-sm p-2 w-full" />
+                            </Form.Item>
+                            <Form.Item label="Date" name="Date"  rules={[{required: true, message: "Required"}]}>
+                                <input  type="date" className="border rounded-sm p-2 w-full" />
+                            </Form.Item>
+                            <Form.Item label="Method" name="Method"  rules={[{required: true, message: "Required"}]}>
+                                <select className="border rounded-sm p-2 w-full">
+                                    <option value="">Select Method...</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Mobile_Money">Mobile Money</option>
+                                    <option value="Bank_Transfer">Transfer</option>
+                                </select>
+                            </Form.Item>
+                            <Form.Item label="Purpose" name="Purpose"  rules={[{required: true, message: "Required"}]}>
+                                <select className="border rounded-sm p-2 w-full">
+                                    <option value="">Select...</option>
+                                    <option value="Title">Title</option>
+                                    <option value="Offering">Offering</option>
+                                    <option value="Contribution">Contribution</option>
+                                </select>
+                            </Form.Item>
+                            <Form.Item label="Reference" name="Reference"  rules={[{required: true, message: "Required"}]}>
+                                <input  type="text" className="border rounded-sm p-2 w-full" />
+                            </Form.Item>
+
+                        </div><br />
+                        <div className="flex justify-end">
+                            <button type="submit" className="bg-sky-700 text-white p-2 rounded ">Add Donation</button>
+                        </div>
+
+                    </Form>
+                </Modal>
+
+
+                <CustomDrawer
+                    open={isSettingsOpen}
+                    onClose={() => setIsSettingsOpen(false)}
+                    title="Settings"
+                >
+                    <Settings />
+                </CustomDrawer>
         </div>
         </div>
     );

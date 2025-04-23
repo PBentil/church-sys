@@ -1,4 +1,3 @@
-// App.tsx
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
@@ -11,6 +10,9 @@ import Report from "./pages/admin/Report";
 import Settings from "./pages/Settings";
 import MainLayout from "./pages/MainLayout.tsx";
 import MemberDashboard from "./pages/members /Memdash.tsx";
+import MembersEvents from "./pages/members /MembersEvents.tsx";
+import MembersDonations from "./pages/members /MembersDonation.tsx";
+import MembersAnnouncements from "./pages/members /MembersAnnouncement.tsx";
 
 function App() {
     return (
@@ -77,7 +79,18 @@ function App() {
                     </MainLayout>
                 }
             />
+            <Route
+                path="/MembersEvents"
+                element={
+                    <MainLayout>
+                        <MembersEvents />
+                    </MainLayout>
+                }
+            />
+            <Route path="/MembersDonations" element={<MainLayout><MembersDonations /></MainLayout>} />
+            <Route path="/MembersAnnouncements" element={<MainLayout><MembersAnnouncements /></MainLayout>} />
         </Routes>
+
     );
 }
 
