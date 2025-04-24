@@ -5,9 +5,10 @@ import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 import Modal from "../../components/Modal.tsx";
 import {Form} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCog, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faClipboardList, faCog, faPlus} from "@fortawesome/free-solid-svg-icons";
 import CustomDrawer from "../../components/Drawer.tsx";
 import Settings from "../Settings.tsx";
+import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 
 
@@ -22,17 +23,30 @@ interface Event {
     location: string;
 }
 
+
+
 const MemberDashboard = () => {
     const [donations, setDonations] = useState<Donation[]>([]);
     const [events, setEvents] = useState<Event[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [isOpen] = useState(true);
 
 
 
+    const [stats] = useState({
+        events: 10,
+        finances: 8,
+        members: 20,
+        attendance:15,
+    });
 
+    const chartData = [
+        { name: "Events", value: stats.events },
+        { name: "Donations", value: stats.finances },
+        { name: "Participations", value: stats.members },
+        { name: "Attendance", value: stats.attendance },
+    ];
 
 
 
@@ -113,8 +127,8 @@ const MemberDashboard = () => {
                     <h2 className="text-lg font-semibold mb-2">Quick Links</h2>
                     <ul className="space-y-2">
                         <li>
-                            <a href="/profile" className="text-sky-700 hover:underline">
-                                Edit Profile
+                            <a href="/MembersAnnouncements" className="text-sky-700 hover:underline">
+                               <FontAwesomeIcon icon={faClipboardList} /> View Announcements
                             </a>
                         </li>
                         <li>
@@ -127,24 +141,13 @@ const MemberDashboard = () => {
                         </li>
                         <li>
                             <a href="/MembersEvents" className="text-sky-700 hover:underline">
-                                View Events
+                                <FontAwesomeIcon icon={faClipboardList} /> View Events
                             </a>
                         </li>
                         <li>
-                            <button
-                                onClick={() => {
-                                    setIsSettingsOpen(true);
-                                    setIsMobileOpen(false);
-                                }}
-                                className="text-sky-700 hover:underline" >
-                                <span
-                                    className={`${
-                                        isOpen ? "inline" : "hidden"
-                                    } transition-all duration-300`}
-                                >
-                                              <FontAwesomeIcon icon={faCog} /> Settings
-            </span>
-                            </button>
+                            <a href="/ProfilePage" className="text-sky-700 hover:underline">
+                                <FontAwesomeIcon icon={faCog} /> Profile Management
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -204,7 +207,23 @@ const MemberDashboard = () => {
                 >
                     <Settings />
                 </CustomDrawer>
+
+
         </div>
+
+            <div className="p-8 mt-8 lg:bg-white shadow-md rounded-lg w-full hidden md:block ">
+                <h3 className="text-lg font-semibold mb-4 text-sky-700">Statistics Overview</h3>
+                <ResponsiveContainer width="100%" height={350}>
+                    <BarChart data={chartData} barSize={50}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
+                        <XAxis dataKey="name" tick={{ fill: "#666", fontSize: 14 }} />
+                        <YAxis tick={{ fill: "#666", fontSize: 14 }} />
+                        <Tooltip cursor={{ fill: "rgba(0,0,0,0.1)" }} />
+                        <Legend />
+                        <Bar dataKey="value" radius={[10, 10, 0, 0]} fill="#0369A1" />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 };

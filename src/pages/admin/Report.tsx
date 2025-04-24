@@ -25,37 +25,49 @@ const Report = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            responsive: ['md'],
         },
         {
             title: 'Amount (GHS)',
             dataIndex: 'amount',
             key: 'amount',
             render: (amount: number | undefined) => amount ? `GHS ${amount}` : '—',
+            responsive: ['md'],
         },
         {
             title: 'Purpose',
             dataIndex: 'purpose',
             key: 'purpose',
+            responsive: ['md'],
         },
         {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
+            responsive: ['md'],
         },
         {
             title: 'Method',
             dataIndex: 'method',
             key: 'method',
+            responsive: ['md'],
+            render: (text: string) => (
+                <div className="max-w-xs truncate" title={text}>
+                    {text}
+                </div>
+            ),
         },
         {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
+            responsive: ['md'],
             render: (status: string) => (
                 <span className={`px-2 py-1 rounded text-white ${status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}>
                     {status}
                 </span>
             ),
+
         },
         {
             title: 'Actions',

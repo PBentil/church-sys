@@ -15,14 +15,14 @@ const Events = () => {
         {
             title: 'No.',
             key: 'index',
-            render: (index: number) => index + 1, // Adding 1 to start from 1 instead of 0
+            render: (_: any, __: any, index: number) => index + 1,
             responsive: ['md'],
         },
         {
             title: 'Event Name',
             dataIndex: 'eventName',
             key: 'eventName',
-            responsive: ['xs'],
+
         },
         {
             title: 'Location',
@@ -42,7 +42,7 @@ const Events = () => {
             dataIndex: 'description',
             key: 'description',
             responsive: ['md'],
-            // Truncate long descriptions
+// Truncate long descriptions
             render: (text: string) => (
                 <div className="max-w-xs truncate" title={text}>
                     {text}
@@ -52,7 +52,7 @@ const Events = () => {
         {
             title: 'Actions',
             key: 'actions',
-            responsive: ['xs'],
+
             render: (_: any, record: any) => (
                 <div className="flex space-x-1 md:space-x-2">
                     <button

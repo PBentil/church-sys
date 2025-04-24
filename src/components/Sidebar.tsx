@@ -5,16 +5,16 @@ import {
     faBars,
     faTimes,
     faHome,
-    faCog,
     faEarth,
     faGlobe,
     faUsers,
     faClipboardList,
-    faRightFromBracket,
+    faRightFromBracket, faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import CustomModal from "./Modal";
 import CustomDrawer from "./Drawer";
 import Settings from "../pages/Settings";
+
 
 type SidebarProps = {
     role: "admin" | "member";
@@ -48,6 +48,8 @@ const Sidebar = ({ role }: SidebarProps) => {
         { to: "/MembersEvents", label: "Events", icon: faClipboardList },
         {to: "/MembersDonations", label: "Donations", icon: faGlobe },
         { to: "/MembersAnnouncements", label: "Announcements", icon: faClipboardList },
+        { to: "/ProfilePage", label: "Profile Management", icon: faCog },
+
 
 
     ];
@@ -101,23 +103,6 @@ const Sidebar = ({ role }: SidebarProps) => {
               </span>
                         </Link>
                     ))}
-
-                    <button
-                        onClick={() => {
-                            setIsSettingsOpen(true);
-                            setIsMobileOpen(false);
-                        }}
-                        className="flex items-center gap-3 p-3 hover:bg-sky-700 hover:text-white text-left rounded w-full"
-                    >
-                        <FontAwesomeIcon icon={faCog} />
-                        <span
-                            className={`${
-                                isOpen ? "inline" : "hidden"
-                            } transition-all duration-300`}
-                        >
-              Settings
-            </span>
-                    </button>
                 </nav>
 
                 {/* Logout */}

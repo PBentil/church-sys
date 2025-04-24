@@ -9,10 +9,13 @@ import Donations from "./pages/admin/Donations";
 import Report from "./pages/admin/Report";
 import Settings from "./pages/Settings";
 import MainLayout from "./pages/MainLayout.tsx";
+import MembersLayout from "./pages/MembersLayout.tsx";
 import MemberDashboard from "./pages/members /Memdash.tsx";
 import MembersEvents from "./pages/members /MembersEvents.tsx";
 import MembersDonations from "./pages/members /MembersDonation.tsx";
 import MembersAnnouncements from "./pages/members /MembersAnnouncement.tsx";
+import ProfilePage from "./pages/members /ProfilePage.tsx";
+
 
 function App() {
     return (
@@ -74,21 +77,22 @@ function App() {
             <Route
                 path="/MemberDashboard"
                 element={
-                    <MainLayout>
+                    <MembersLayout>
                         <MemberDashboard />
-                    </MainLayout>
+                    </MembersLayout>
                 }
             />
             <Route
                 path="/MembersEvents"
                 element={
-                    <MainLayout>
+                    <MembersLayout>
                         <MembersEvents />
-                    </MainLayout>
+                    </MembersLayout>
                 }
             />
-            <Route path="/MembersDonations" element={<MainLayout><MembersDonations /></MainLayout>} />
-            <Route path="/MembersAnnouncements" element={<MainLayout><MembersAnnouncements /></MainLayout>} />
+            <Route path="/MembersDonations" element={<MembersLayout><MembersDonations /></MembersLayout>} />
+            <Route path="/MembersAnnouncements" element={<MembersLayout><MembersAnnouncements /></MembersLayout>} />
+            <Route path="/ProfilePage" element={<MembersLayout><ProfilePage /></MembersLayout>} />
         </Routes>
 
     );

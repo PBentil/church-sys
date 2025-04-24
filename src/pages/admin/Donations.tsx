@@ -36,8 +36,13 @@ const Donations = () => {
             },
         ];
 
-// Columns definition for the table
     const columns = [
+        {
+            title: 'No.',
+            key: 'index',
+            render: (_: any, __: any, index: number) => index + 1,
+            responsive: ['md'],
+        },
         {
             title: 'Donor Name',
             dataIndex: 'donorName',
@@ -48,27 +53,39 @@ const Donations = () => {
             dataIndex: 'amount',
             key: 'amount',
             render: (amount: number) => `₵${amount}`, // formats amount nicely
+            responsive: ['md'],
         },
         {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
+            responsive: ['sm'],
         },
         {
             title: 'Method',
             dataIndex: 'method',
             key: 'method',
+            responsive: ['sm'],
+
         },
         {
             title: 'Purpose',
             dataIndex: 'purpose',
             key: 'purpose',
+            responsive: ['md'],
         },
         {
             title: 'Reference',
             dataIndex: 'reference',
             key: 'reference',
+            responsive: ['md'],
+            render: (text: string) => (
+                <div className="max-w-xs truncate" title={text}>
+                    {text}
+                </div>
+            ),
         },
+
         {
             title: 'Actions',
             key: 'actions',
@@ -165,7 +182,7 @@ const Donations = () => {
                             </button>
                         </div>
                     </div><br />
-                    <div className="overflow-x-auto bg-white rounded-lg shadow">
+                    <div className=" bg-white rounded-lg shadow">
                         <Table  data={Donations} columns={columns} />
                     </div>
                 </div>

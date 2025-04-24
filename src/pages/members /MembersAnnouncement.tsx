@@ -16,13 +16,13 @@ const MembersAnnouncements = () => {
             title: 'Title',
             dataIndex: 'title',
             key: 'title',
-            responsive: ['xs'],
+
         },
         {
             title: 'Category',
             dataIndex: 'category',
             key: 'category',
-            responsive: ['sm'],
+
         },
         {
             title: 'Date',

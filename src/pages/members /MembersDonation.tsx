@@ -16,7 +16,6 @@ const MembersDonations = () => {
     const Donations = [
         {
             key: '1',
-            donorName: 'John Doe',
             amount: 100,
             date: '2025-04-01',
             method: 'Cash',
@@ -25,7 +24,6 @@ const MembersDonations = () => {
         },
         {
             key: '2',
-            donorName: 'Jane Smith',
             amount: 250,
             date: '2025-04-03',
             method: 'Mobile Money',
@@ -37,9 +35,10 @@ const MembersDonations = () => {
 // Columns definition for the table
     const columns = [
         {
-            title: 'Donor Name',
-            dataIndex: 'donorName',
-            key: 'donorName',
+            title: 'No.',
+            key: 'index',
+            render: (_: any, __: any, index: number) => index + 1,
+            responsive: ['md'],
         },
         {
             title: 'Amount (₵)',
@@ -51,11 +50,13 @@ const MembersDonations = () => {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
+            responsive: ['md'],
         },
         {
             title: 'Method',
             dataIndex: 'method',
             key: 'method',
+            responsive: ['md'],
         },
         {
             title: 'Purpose',
@@ -66,6 +67,7 @@ const MembersDonations = () => {
             title: 'Reference',
             dataIndex: 'reference',
             key: 'reference',
+            responsive: ['md'],
         },
 
     ];
@@ -78,7 +80,7 @@ const MembersDonations = () => {
                 <Topbar toggleSidebar={() => { }} />
                 <Breadcrumbs />
 
-                <div className="p-8 mt-24">
+                <div className="p-8 lg:mt-20 mt-20">
                     <Modal open={isModalOpen} onCancel={()=>setIsModalOpen(false)} title="Donation">
                         <Form onSubmit={()=>setIsModalOpen(true)} layout="vertical" >
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -121,9 +123,7 @@ const MembersDonations = () => {
                     {/* Filters */}
                     <div className="flex flex-col lg:flex-row justify-between gap-4 lg:items-center">
                         <h1 className="font-bold text-xl">Donations Management</h1>
-
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-
                             <button
                                 className="bg-sky-700 text-white px-3 py-2 rounded-lg"
                                 onClick={() => setIsModalOpen(true)}
@@ -132,8 +132,8 @@ const MembersDonations = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="p-2 sm:p-4 md:p-8 mt-8 md:mt-24">
-                        <div className="overflow-x-auto bg-white rounded-lg shadow">
+                    <div className="p-2 sm:p-4 md:p-8">
+                        <div className="overflow-x-auto bg-white rounded-lg shadow ">
                             <Table title="Your Donations" columns={columns} data={Donations} />
                         </div>
                     </div>

@@ -9,14 +9,13 @@ const MembersEvents = () => {
         {
             title: 'No.',
             key: 'index',
-            render: (index: number) => index + 1, // Adding 1 to start from 1 instead of 0
+            render: (_ : any, __: any, index: number) => index + 1, // Adding 1 to start from 1 instead of 0
             responsive: ['md'],
         },
         {
             title: 'Event Name',
             dataIndex: 'eventName',
             key: 'eventName',
-            responsive: ['xs'],
         },
         {
             title: 'Location',
@@ -29,13 +28,13 @@ const MembersEvents = () => {
             dataIndex: 'date',
             key: 'date',
             render: (text: string) => <span>{new Date(text).toLocaleDateString()}</span>, // format date
-            responsive: ['sm'],
+
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
-            responsive: ['md'],
+            responsive: ['sm'],
             // Truncate long descriptions
             render: (text: string) => (
                 <div className="max-w-xs truncate" title={text}>

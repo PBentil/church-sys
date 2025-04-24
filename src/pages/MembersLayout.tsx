@@ -24,7 +24,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                     isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 } fixed top-0 left-0 h-full bg-white text-gray-600 shadow-lg z-50 transition-all duration-300 ease-in-out md:relative md:translate-x-0 md:w-64 md:block`}
             >
-                <Sidebar role={"admin"} />
+                <Sidebar role={"member"} />
             </div>
 
             {/* Content Area */}

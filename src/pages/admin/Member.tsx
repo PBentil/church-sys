@@ -18,7 +18,6 @@ const Members = () => {
     const membersData = [
         {
             key: '1',
-            id: '1',
             firstName: 'John',
             lastName: 'Doe',
             gender: 'Male',
@@ -27,7 +26,6 @@ const Members = () => {
         },
         {
             key: '2',
-            id: '2',
             firstName: 'Jane',
             lastName: 'Smith',
             gender: 'Female',
@@ -36,7 +34,6 @@ const Members = () => {
         },
         {
             key: '3',
-            id: '3',
             firstName: 'Sam',
             lastName: 'Johnson',
             gender: 'Male',
@@ -48,34 +45,39 @@ const Members = () => {
 // Columns definition for the table
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
+            title: 'No.',
+            key: 'index',
+            render: (_: any, __: any, index: number) => index + 1,
+            responsive: ['md'],
         },
+
         {
-            title: 'First Name',
-            dataIndex: 'firstName',
-            key: 'firstName',
-        },
-        {
-            title: 'Last Name',
-            dataIndex: 'lastName',
-            key: 'lastName',
+            title: 'Full Name',
+            key: 'fullName',
+            render: (_: any, record: any) => `${record.firstName} ${record.lastName}`,
         },
         {
             title: 'Gender',
             dataIndex: 'gender',
             key: 'gender',
+            responsive: ['sm'],
         },
         {
             title: 'Role',
             dataIndex: 'role',
             key: 'role',
+            responsive: ['sm'],
         },
         {
             title: 'Address',
             dataIndex: 'address',
             key: 'address',
+            responsive: ['md'],
+            render: (text: string) => (
+                <div className="max-w-xs truncate" title={text}>
+                    {text}
+                </div>
+            ),
         },
         {
             title: 'Actions',
