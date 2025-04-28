@@ -29,10 +29,10 @@ const Dashboard = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     const chartData = [
-        { name: "Events", value: stats.events, color: "#4F46E5" },
-        { name: "Finances", value: stats.finances, color: "#22C55E" },
-        { name: "Members", value: stats.members, color: "#EAB308" },
-        { name: "Attendance", value: stats.attendance, color: "#EF4444" },
+        { name: "Events", value: stats.events },
+        { name: "Finances", value: stats.finances },
+        { name: "Members", value: stats.members },
+        { name: "Attendance", value: stats.attendance},
     ];
 
 

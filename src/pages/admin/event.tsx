@@ -34,7 +34,7 @@ const Events = () => {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
-            render: (text: string) => <span>{new Date(text).toLocaleDateString()}</span>, // format date
+            render: (text: string) => <span>{new Date(text).toLocaleDateString()}</span>,
             responsive: ['sm'],
         },
         {
@@ -142,7 +142,7 @@ const Events = () => {
                     </div>
 
                     <div className="overflow-x-auto bg-white rounded-lg shadow">
-                        <Table title="Events" columns={columns} data={eventData} />
+                        <Table title="Events" columns={columns} data={eventData}  />
                     </div>
 
                     <Modal open={isModalOpen} onCancel={() => setIsModalOpen(false)} title="Add Event">

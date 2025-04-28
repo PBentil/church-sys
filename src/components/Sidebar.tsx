@@ -92,6 +92,7 @@ const Sidebar = ({ role }: SidebarProps) => {
                             to={to}
                             className="flex items-center gap-3 p-3 rounded hover:bg-sky-700 hover:text-white"
                             onClick={handleLinkClick}
+
                         >
                             <FontAwesomeIcon icon={icon} size="lg" />
                             <span

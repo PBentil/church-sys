@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import church from "../images/church .avif";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 
+interface LoginProps {
+    handleLogin: () => void;
+}
 
-const Login = () => {
+const Login:React.FC<LoginProps> = ({ handleLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
-
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -22,17 +23,23 @@ const Login = () => {
             return;
         }
 
-        // Fake authentication (replace with actual logic)
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailRegex.test(email)) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+
+
         if (email === "P.Bentil@gmail.com" && password === "password") {
-            navigate("/dashboard"); // Redirect after login
+            handleLogin();
         } else {
             setError("Invalid credentials. Try again.");
         }
     };
 
+
     return (
         <div className="flex min-h-screen">
-            {/* Left Section - Login Form */}
             <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-gray-100">
                 <div className="w-full max-w-md">
                     <h2 className="text-xl mb-2 text-gray-800 font-light"><span className="text-sky-700 font-bold">Faith</span>Connect</h2>
@@ -85,7 +92,6 @@ const Login = () => {
                 </div>
             </div>
 
-            {/* Right Section - Church Image */}
             <div className="hidden md:flex w-1/2 bg-gray-200">
                 <img
                     src={church}
