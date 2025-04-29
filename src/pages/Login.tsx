@@ -7,9 +7,10 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 interface LoginProps {
     handleLogin: () => void;
+    handleMemberLogin: () => void;
 }
 
-const Login:React.FC<LoginProps> = ({ handleLogin }) => {
+const Login:React.FC<LoginProps> = ({ handleLogin, handleMemberLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -33,6 +34,12 @@ const Login:React.FC<LoginProps> = ({ handleLogin }) => {
         if (email === "P.Bentil@gmail.com" && password === "password") {
             handleLogin();
         } else {
+            setError("Invalid credentials. Try again.");
+        }
+
+        if (email === "member@gmail.com" && password == "member"){
+            handleMemberLogin();
+        }else {
             setError("Invalid credentials. Try again.");
         }
     };

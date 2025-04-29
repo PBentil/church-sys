@@ -1,10 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBars, faCog, faRightFromBracket, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faCog, faRightFromBracket, faUser, faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import CustomModal from "./Modal.tsx";
 import CustomDrawer from "./Drawer.tsx";
 import Settings from "../pages/Settings.tsx";
+
+
+
 
 const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
     const [isOpen] = useState(true);
@@ -52,7 +55,11 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="text-gray-500 text-lg focus:outline-none"
                 >
-                    <FontAwesomeIcon icon={faUser} />
+                    <span className="flex items-center gap-2">
+                        <FontAwesomeIcon icon={faChevronDown} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                        <FontAwesomeIcon icon={faUser} />
+                    </span>
+
                 </button>
 
                 {dropdownOpen && (

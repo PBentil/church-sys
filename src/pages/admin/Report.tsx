@@ -63,7 +63,7 @@ const Report = () => {
             key: 'status',
             responsive: ['md'],
             render: (status: string) => (
-                <span className={`px-2 py-1 rounded text-white ${status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}>
+                <span className={`px-2 py-1 rounded-2xl text-white ${status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}>
                     {status}
                 </span>
             ),

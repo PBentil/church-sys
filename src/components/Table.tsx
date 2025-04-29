@@ -1,21 +1,37 @@
 import React from 'react';
-import { Table } from 'antd';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTable} from "@fortawesome/free-solid-svg-icons";
+import { Table, Spin } from 'antd';
+import TlaEmpty from "./Empty.tsx";
 
 interface TableComponentProps {
     columns: any[];
     data: any[];
     title?: string;
+    loading?: boolean;
 }
 
-const TableComponent: React.FC<TableComponentProps> = ({ title, columns, data }) => {
+const TableComponent: React.FC<TableComponentProps> = ({ title, columns, data, loading = false }) => {
     const isDataEmpty = !data || data.length === 0;
+
     return (
-        <div className="bg-white p-4 shadow-lg rounded-lg w-full">
-            {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
-            {isDataEmpty ?( <div className="text-center text-gray-500 text-xl mt-10 block"><FontAwesomeIcon icon={faTable} /> No data avaliable</div>):(
-                <Table columns={columns} dataSource={data} pagination={true}   scroll={{ x: 'max-content' }} />
+        <div className="bg-white p-4 shadow-lg rounded-lg w-full min-h-[200px]">
+            {loading ? (
+                <div className="flex justify-center items-center h-[150px]">
+                    <Spin size="large" tip="Loading..." />
+                </div>
+            ) : (
+                <>
+                    {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
+                    {isDataEmpty ? (
+                        <TlaEmpty />
+                    ) : (
+                        <Table
+                            columns={columns}
+                            dataSource={data}
+                            pagination={true}
+                            scroll={{ x: 'max-content' }}
+                        />
+                    )}
+                </>
             )}
         </div>
     );

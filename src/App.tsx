@@ -28,12 +28,17 @@ const App = ()=> {
         navigate("/dashboard");
     }
 
+    const handleMemberLogin = () =>{
+        setIsLoggedIn(true);
+        navigate("/MemberDashboard");
+    }
+
 
     return (
         <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+            <Route path="/login" element={<Login handleLogin={handleLogin} handleMemberLogin={handleMemberLogin}/>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Protected Routes (with Sidebar) */}
