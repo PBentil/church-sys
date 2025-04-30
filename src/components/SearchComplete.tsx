@@ -35,19 +35,29 @@ const searchResult = (query: string) =>
             };
         });
 
-interface AutoCompleteComponentProps {
+interface SearchCompleteProps {
     placeholder: string;
+    onSearch: (value: string) => void;  // Changed from onSearchExternal to onSearch
+    "aria-label"?: string;
 }
 
-const SearchComplete: React.FC<AutoCompleteComponentProps> = ({ placeholder }) => {
+const SearchComplete: React.FC<SearchCompleteProps> = ({ 
+    placeholder, 
+    onSearch,
+    "aria-label": ariaLabel 
+}) => {
     const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
 
     const handleSearch = (value: string) => {
         setOptions(value ? searchResult(value) : []);
+        // Call the external onSearch handler to update parent component state
+        onSearch(value);
     };
 
     const onSelect = (value: string) => {
         console.log('onSelect', value);
+        // Also call onSearch when an option is selected
+        onSearch(value);
     };
 
     return (
@@ -58,6 +68,7 @@ const SearchComplete: React.FC<AutoCompleteComponentProps> = ({ placeholder }) =
             onSelect={onSelect}
             onSearch={handleSearch}
             size="large"
+            aria-label={ariaLabel}
         >
             <Input.Search size="large" placeholder={placeholder} enterButton />
         </AutoComplete>

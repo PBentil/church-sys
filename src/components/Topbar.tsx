@@ -56,8 +56,8 @@ const Topbar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
                     className="text-gray-500 text-lg focus:outline-none"
                 >
                     <span className="flex items-center gap-2">
-                        <FontAwesomeIcon icon={faChevronDown} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                         <FontAwesomeIcon icon={faUser} />
+                          <FontAwesomeIcon icon={faChevronDown} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                     </span>
 
                 </button>

@@ -102,7 +102,7 @@ const Events: React.FC = () => {
                         aria-label="Edit"
                     >
                         <span className="hidden md:inline">Edit</span>
-                        <span className="inline md:hidden">✏️</span>
+                        <span className="inline md:hidden">Edit</span>
                     </button>
                     <button
                         onClick={() => handleDelete(record.key)}
@@ -110,7 +110,7 @@ const Events: React.FC = () => {
                         aria-label="Delete"
                     >
                         <span className="hidden md:inline">Delete</span>
-                        <span className="inline md:hidden">🗑️</span>
+                        <span className="inline md:hidden">Delete</span>
                     </button>
                 </div>
             ),
