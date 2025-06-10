@@ -91,9 +91,14 @@ const Login:React.FC<LoginProps> = ({ handleLogin, handleMemberLogin }) => {
                         <div className="mt-2 text-right">
                             <Link to="/forgot-password" className="text-sky-800 hover:underline text-sm">
                                 Forgot Password?
+                            </Link><br />
+                            <Link to="/sign-up" className=" hover:text-sky-700 hover:underline text-sm">
+                                Don't have an account?
                             </Link>
                             <p className="font-extralight text-sm text-gray-700 mt-2">©2025 FaithConnect-Powered By Bentil</p>
+
                         </div>
+
 
                     </form>
                 </div>

@@ -17,6 +17,8 @@ import MembersDonations from "./pages/members /MembersDonation.tsx";
 import MembersAnnouncements from "./pages/members /MembersAnnouncement.tsx";
 import ProfilePage from "./pages/members /ProfilePage.tsx";
 import ProtectedRoute from "./pages/ProtectedRoute.tsx";
+import SignUp from "./pages/Signup.tsx";
+import Verification from "./pages/verfication.tsx";
 
 
 const App = ()=> {
@@ -40,6 +42,8 @@ const App = ()=> {
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} handleMemberLogin={handleMemberLogin}/>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/sign-up" element={<SignUp handleLogin={handleLogin} handleMemberLogin={handleMemberLogin} />} />
+            <Route path="/verification" element={<Verification />} />
 
             {/* Protected Routes (with Sidebar) */}
             <Route
